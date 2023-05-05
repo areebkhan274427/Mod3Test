@@ -39,11 +39,15 @@ fetch('https://api.ipify.org?format=json')
 
 getBtn.addEventListener('click',()=>{
         console.log('ehllpo');
+        messageApi.style.display='block';
         // 6cb6e85b8cb4a2
         setTimeout(() => {
             fetch(`https://ipinfo.io/${IP}/geo?token=6cb6e85b8cb4a2`)
             .then((resp)=>resp.json())
             .then((data)=>{
+                messageApi.style.display='none';
+                infoContainer.style.display='flex';
+                pinContainer.style.display='block';
                 dataJson=data;
                 console.log("data",dataJson);
                 let location=dataJson.loc;
@@ -67,15 +71,8 @@ getBtn.addEventListener('click',()=>{
     
             })
             .catch((e)=>console.log('Error',e))
-
-           
-
         }, 1000);
-
-
         getBtn.style.display='none';
-        infoContainer.style.display='flex';
-        pinContainer.style.display='block';
 })
 
 function postOffice(pin) {
