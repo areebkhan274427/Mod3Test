@@ -15,6 +15,7 @@ const dateTime = document.getElementById('date-time');
 const pincode = document.getElementById('pincode');
 const message = document.getElementById('message');
 const search = document.getElementById('search');
+const messageApi = document.getElementById('message-ip');
 
 
 var IP;
@@ -30,6 +31,7 @@ fetch('https://api.ipify.org?format=json')
 .then((data)=>{
     console.log(data.ip);
     IP=data.ip;
+    messageApi.style.display='none';
     document.getElementById('ip').innerText = data.ip;
 }).catch((e)=>{
     console.log("Error while fetching Ip address",e);
@@ -116,7 +118,7 @@ function showPostOffice(Arr) {
 search.addEventListener('input',()=>{
     var filterArr = postOfficeArr.filter((ele)=>{
         // return ele.toLocation.toLowerCase().includes(search.value.trim().toLowerCase());
-        if(ele.Name.toLowerCase().includes(search.value.trim().toLowerCase())){
+        if(ele.Name.toLowerCase().includes(search.value.trim().toLowerCase()) || ele.BranchType.toLowerCase().includes(search.value.trim().toLowerCase())){
             return ele;
         }
     })
